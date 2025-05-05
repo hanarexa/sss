@@ -76,6 +76,7 @@ function endGame() {
     clearInterval(gameTimer);
     first_target.hide();
     second_target.hide();
+    third_target.hide();
     timerDisplay.textContent = "Время вышло";
     gameOverDisplay.style.display = "block";
     setTimeout(() => {
