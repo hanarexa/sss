@@ -10,9 +10,8 @@ let gameTimer;
 let first_target, second_target, third_target; 
 
 class Target {
-    constructor(gameField, onClickCallback, type) {
+    constructor(gameField, type) {
       this.gameField = gameField;
-      this.onClickCallback = onClickCallback;
       this.button = null;
       this.type = type;
       this.isActive = false;
@@ -51,8 +50,7 @@ class Target {
         this.button.addEventListener("click", () => {
             score++;
             scoreDisplay.textContent = `Попадания: ${score}`;
-
-            this.onClickCallback();
+            
             this.hide();
             this.show();
         });
@@ -82,6 +80,8 @@ function endGame() {
     setTimeout(() => {
         alert(`КОНЕЦ. СЧЕТ: ${score}`);
     }, 500)
+    start_btn.style.display = "block";
+
 }
 
 function play() {
@@ -91,17 +91,11 @@ function play() {
     gameOverDisplay.style.display = "none";
     updateTimer();
 
-    first_target = new Target(game_area, () => {
-        console.log("мишень 1 нажата");
-    }, 1);
+    first_target = new Target(game_area, 1);
 
-    second_target = new Target(game_area, () => {
-        console.log("мишень 2 нажата");
-    }, 2);
+    second_target = new Target(game_area, 2);
 
-    third_target = new Target(game_area, () => {
-        console.log("мишень 3 нажата");
-    }, 3);
+    third_target = new Target(game_area, 3);
 
     second_target.show();
     first_target.show();
@@ -121,7 +115,7 @@ function play() {
 
 
 start_btn.addEventListener("click", function() {
-    start_btn.remove();
+    start_btn.style.display = "none";
     game_area.style.marginTop = "40px";
     game_area.style.backgroundColor = "gray";
     play();
